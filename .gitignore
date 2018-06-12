@@ -6,3 +6,4 @@ target
 RemoteSystemsTempFiles/
 .metadata/
 *.log
+/.recommenders/
