@@ -1,11 +1,5 @@
 package fr.demo.metier.exception;
 
-/**
- * ProxemBusinessException.
- * 
- * @author ksebai
- * 
- */
 public class ProxemBusinessException extends WebServiceBusinessException {
   /**
    * 
