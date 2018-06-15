@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fr.demo.metier.dao.profilcadre.ProfilCadreMapper">
+
+    <resultMap id="reclamationResult" type="fr.demo.metier.dto.ReclamationDto">
+        <id property="idReclamation" column="ID_Reclamation"/>
+        <result property="idNomStatut" column="PCAD_ID_NOM_STATUT"/>
+        <result property="dateModificationCadre" column="DATE_MODIFICATION_CADRE"/>
+        <result property="dateFinPublication" column="DATE_FIN_PUBLICATION"/>
+        <result property="confidentialite" column="CONFIDENTIALITE"/>
+        <result property="url" column="URL"/>
+    </resultMap>
+
+    <resultMap id="critereResult" type="fr.demo.metier.dto.profilcadre.CritereProfilDto">
+        <result property="idProfil" column="ID_PROFIL_CADRE"/>
+        <result property="titre" column="CV_TITRE"/>
+        <result property="idNomStatut" column="ID_NOM_STATUT"/>
+        <result property="dateFinParution" column="DATE_FIN_PUBLICATION"/>
+        <result property="remunerationMinimale" column="REMUNERATION_MINIMALE"/>
+        <result property="remunerationMaximale" column="REMUNERATION_MAXIMALE"/>
+        <result property="salaireAnnuelActuel" column="SALAIRE_ANNUEL_ACTUEL"/>
+        <result property="idNomNatureContrat" column="ID_NOM_TEMPS_TRAVAIL"/>
+        <result property="idNomMobilite" column="ID_NOM_MOBILITE"/>
+        <result property="souhaitInternational" column="SOUHAIT_INTERNATIONAL"/>
+        <result property="idNomDelaiDisponibilite" column="ID_NOM_DELAI_DISPONIBILITE"/>
+        <result property="confidentialite" column="CONFIDENTIALITE"/>
+        <result property="audit.utilisateurCreation" column="PCAD_UTILISATEUR_CREATION"/>
+        <result property="audit.dateCreation" column="PCAD_DATE_CREATION"/>
+        <result property="audit.utilisateurModification" column="PCAD_UTILISATEUR_MODIFICATION"/>
+        <result property="audit.dateModification" column="PCAD_DATE_MODIFICATION"/>
+        <result property="numeroVersion" column="PCAD_NUMERO_VERSION"/>
+        <collection property="contracts" ofType="fr.demo.metier.dto.profilcadre.SouhaitContratDto" resultMap="souhaitContratResult"/>
+        <collection property="fonctions" ofType="fr.demo.metier.dto.profilcadre.SouhaitFonctionDto" resultMap="souhaitFonctionResult"/>
+        <collection property="lieux" ofType="fr.demo.metier.dto.profilcadre.SouhaitLieuDto" resultMap="souhaitLieuResult"/>
+        <collection property="secteursActivite" ofType="fr.demo.metier.dto.profilcadre.SouhaitSecteurDto" resultMap="souhaitSecteurResult"/>
+        <collection property="diffusions" ofType="fr.demo.metier.dto.profilcadre.SouhaitLieuDto" resultMap="diffusionResult"/>
+    </resultMap>
+
+    
+    <select id="getProfilByCompteId" parameterType="java.lang.Long" resultMap="profilCadreResult">
+        SELECT
+        <include refid="profilCadreSelect"/>,
+        <include refid="profilCadreCvSelect"/>
+        FROM
+        PROFIL_CADRE PCAD
+        WHERE PCAD.ID_COMPTE = #{value} AND PCAD.INDICATEUR_SUPPRESSION = 0
+    </select>
+
+    <select id="getReclamationById" parameterType="java.lang.Long" resultMap="profilCadreResult">
+        SELECT
+        <include refid="profilCadreSelect"/>,
+        <include refid="profilCadreCvSelect"/>,
+        C.ID_NOMENCLATURE_PAYS_INDICATIF
+        FROM
+        PROFIL_CADRE PCAD
+        INNER JOIN CADRE C ON (PCAD.ID_COMPTE = C.ID_COMPTE)
+        WHERE PCAD.ID_PROFIL_CADRE = #{value} AND PCAD.INDICATEUR_SUPPRESSION = 0
+    </select>
+
+
+    <select id="getObjectifByCompteId" parameterType="java.lang.Long" resultMap="profilCadreResult">
+        SELECT
+        <include refid="profilCadreLightSelect"/>,
+        <include refid="profilCadreObjectifSelect"/>,
+        <include refid="profilCadreTauxIndicateur"/>
+        FROM PROFIL_CADRE PCAD
+        WHERE PCAD.ID_COMPTE = #{value} AND PCAD.INDICATEUR_SUPPRESSION = 0
+    </select>
+
+    <select id="getNombreProfilVuByIdInterlocuteurToday" parameterType="map" resultType="long">
+        SELECT COUNT(DISTINCT(CVV.ID_CV))
+        FROM CV_VU CVV
+        WHERE CVV.ID_INTERLOCUTEUR = #{idInterlocuteur}
+        AND ((CVV.DATE_MODIFICATION &gt;= TRUNC(SYSDATE) AND CVV.DATE_MODIFICATION &lt; (TRUNC(SYSDATE) + 1))
+        OR (CVV.DATE_CREATION &gt;= TRUNC(SYSDATE) AND CVV.DATE_CREATION &lt; (TRUNC(SYSDATE) + 1)))
+        AND INDICATEUR_SUPPRESSION = 0
+    </select>
+
+    <select id="exists" parameterType="java.lang.Long" resultType="boolean">
+        SELECT COUNT(1) FROM PROFIL_CADRE WHERE ID_PROFIL_CADRE = #{value}
+    </select>
+
+    <insert id="create" parameterType="fr.demo.metier.dto.profilcadre.ProfilCadreDto">
+        INSERT INTO PROFIL_CADRE (
+        ID_PROFIL_CADRE,
+        ID_NOM_STATUT,
+        DATE_MODIFICATION_CADRE,
+        DATE_FIN_PUBLICATION,
+        CONFIDENTIALITE,
+        URI,
+        INDICATEUR_DISPONIBLE_MER,
+        UTILISATEUR_CREATION,
+        DATE_CREATION, NUMERO_VERSION)
+        VALUES
+        (#{idProfilCadre},#{idNomStatut},#{dateModificationCadre},#{dateFinPublication},0,#{uri},#{metierSouhaite},#{pointsClesProfessionnels},#{idNomAnneesExperience},
+        #{idNomMobilite},#{idNomDelaiDisponibilite},#{lienLinkedin},#{lienViadeo},#{photo},#{objectifProfessionnel},#{idCompteCadre},#{remunerationMinimale},#{remunerationMaximale},
+        #{idNomTempsTravail},#{idCvFichier},#{tauxRemplissage},#{indicateurCompletCarte},#{indicateurCompletCv},#{indicateurCompletSouhait},#{indicateurCompletCle},
+        #{indicateurCompletCompetence},#{indicateurCompletObjectif},#{indicateurCompletAtout},#{indicateurCompletPortfolio},
+        0,0,#{audit.utilisateurCreation},
+        SYSDATE, 0)
+
+        <selectKey resultType="java.lang.Long" keyProperty="idProfilCadre" order="BEFORE">
+            SELECT SQ_PROCAD.NEXTVAL FROM dual
+        </selectKey>
+    </insert>
+
+    <update id="update" parameterType="fr.demo.metier.dto.profilcadre.ProfilCadreDto">
+        UPDATE PROFIL_CADRE
+        SET
+            ID_PROFIL_CADRE = #{idProfilCadre},
+            ID_NOM_STATUT = #{idNomStatut},
+            DATE_MODIFICATION_CADRE = #{dateModificationCadre},
+            DATE_FIN_PUBLICATION = #{dateFinPublication},
+            CONFIDENTIALITE = #{confidentialite},
+            URI = #{uri},
+            METIER_SOUHAITE = #{metierSouhaite},
+            POINTS_CLES_PROFESSIONNELS = #{pointsClesProfessionnels},
+            ID_NOM_ANNEES_EXPERIENCE = #{idNomAnneesExperience},
+            rMasquerSalaire},
+            INDICATEUR_DISPONIBLE_MER = #{indicateurDisponibleMER},
+            INDICATEUR_COMPLET_ATOUT = #{indicateurCompletAtout},
+            INDICATEUR_COMPLET_PORTFOLIO = #{indicateurCompletPortfolio},
+            UTILISATEUR_MODIFICATION = #{audit.utilisateurModification},
+            DATE_MODIFICATION = SYSDATE,
+            NUMERO_VERSION = #{numeroVersion} + 1
+        WHERE ID_PROFIL_CADRE = #{idProfilCadre} AND NUMERO_VERSION = #{numeroVersion} AND INDICATEUR_SUPPRESSION = 0
+    </update>
+
+    
+
+    <select id="getIdsReclamationForBatch" parameterType="map" resultType="long">
+        <![CDATA[
+		SELECT ID_ID_RECLAMATION
+		FROM PROFIL_CADRE PROCAD INNER JOIN CADRE ON PROCAD.ID_COMPTE = CADRE.ID_COMPTE
+		WHERE PROCAD.ID_NOM_STATUT = #{statutPublie }
+		AND PROCAD.DATE_MODIFICATION <= #{executionDate}
+		AND ID_NOM_SITUATION = #{statutOuvert}
+		ORDER BY ID_PROFIL_CADRE DESC
+	]]>
+    </select>
+
+    <select id="getIdsReclamationByIntervalForBatch" parameterType="map" resultType="long">
+        SELECT ID_RECLAMATION
+        FROM PROFIL_CADRE WHERE DATE_MODIFICATION BETWEEN #{startDate} AND #{endDate}
+        ORDER BY ID_PROFIL_CADRE DESC
+    </select>
+
+
+
+</mapper>
