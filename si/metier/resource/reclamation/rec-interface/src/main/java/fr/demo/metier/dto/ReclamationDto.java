@@ -3,66 +3,61 @@ package fr.demo.metier.dto;
 import fr.demo.metier.model.core.*;
 import org.hibernate.validator.constraints.Length;
 import java.io.Serializable;
-import java.util.Date;
 
 public class ReclamationDto implements IdObject, VersionObject, Auditable, Serializable, InfoConnexionsObject {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
 	private AuditObject audit;
 
-    private InfoConnexions infoConnexions;
+	private InfoConnexions infoConnexions;
 
-    private Long idReclamation;
+	private Long idReclamation;
 
+	@Length(max = 255)
+	private String causeReclamation, description, reponse, url;
 
-    private Date dateModification;
+	private Long familleReclamation, typeReclamation, numeroVersion;
+	
+	private boolean fonde;
 
-    private Date dateFinPublication;
+	// TODO : add pattern validation depending of the business scenario
+	// @Pattern(regexp =
+	// "((http|https)://(.+)\\.linkedin\\.com(.+))|((http|https)://linkd\\.in\\/(.+))",
+	// message = "{fr.demo.validator.constraints.url.message}", groups =
+	// ReclamationInterlocuteursTraitement.class)
+	private String lienLinkedin;
 
-    @Length(max = 100)
-    private String objetReclamation;
+	// @Pattern(regexp = "(http|https)://(.+)\\.viadeo\\.com(.+)", message =
+	// "{fr.demo.validator.constraints.url.message}", groups =
+	// ReclamationInterlocuteursTraitement.class)
+	private String lienViadeo;
 
-// TODO : add pattern validation depending of the business scenario
-    //@Pattern(regexp = "((http|https)://(.+)\\.linkedin\\.com(.+))|((http|https)://linkd\\.in\\/(.+))", message = "{fr.demo.validator.constraints.url.message}", groups = ReclamationInterlocuteursTraitement.class)
-    private String lienLinkedin;
+	public ReclamationDto() {
+	}
 
-    //@Pattern(regexp = "(http|https)://(.+)\\.viadeo\\.com(.+)", message = "{fr.demo.validator.constraints.url.message}", groups = ReclamationInterlocuteursTraitement.class)
-    private String lienViadeo;
+	@Override
+	public AuditObject getAudit() {
+		return audit;
+	}
 
-    @Length(max = 256)
-    private String url;
+	@Override
+	public void setAudit(AuditObject audit) {
+		this.audit = audit;
+	}
 
-    private String description;
-    
-    private Long numeroVersion;
+	@Override
+	public InfoConnexions getInfoConnexions() {
+		return infoConnexions;
+	}
 
-
-    public ReclamationDto() {
-    }
-
-    @Override
-    public AuditObject getAudit() {
-        return audit;
-    }
-
-    @Override
-    public void setAudit(AuditObject audit) {
-        this.audit = audit;
-    }
-
-    @Override
-    public InfoConnexions getInfoConnexions() {
-        return infoConnexions;
-    }
-
-    @Override
-    public void setInfoConnexions(InfoConnexions infoConnexions) {
-        this.infoConnexions = infoConnexions;
-    }
+	@Override
+	public void setInfoConnexions(InfoConnexions infoConnexions) {
+		this.infoConnexions = infoConnexions;
+	}
 
 	@Override
 	public Long getId() {
@@ -72,7 +67,7 @@ public class ReclamationDto implements IdObject, VersionObject, Auditable, Seria
 	@Override
 	public void setId(Long id) {
 		this.idReclamation = id;
-		
+
 	}
 
 	@Override
@@ -83,7 +78,7 @@ public class ReclamationDto implements IdObject, VersionObject, Auditable, Seria
 	@Override
 	public void setNumeroVersion(Long numeroVersion) {
 		this.numeroVersion = numeroVersion;
-		
+
 	}
 
 	public Long getIdReclamation() {
@@ -94,28 +89,52 @@ public class ReclamationDto implements IdObject, VersionObject, Auditable, Seria
 		this.idReclamation = idReclamation;
 	}
 
-	public Date getDateModification() {
-		return dateModification;
+	public String getCauseReclamation() {
+		return causeReclamation;
 	}
 
-	public void setDateModification(Date dateModification) {
-		this.dateModification = dateModification;
+	public void setCauseReclamation(String causeReclamation) {
+		this.causeReclamation = causeReclamation;
 	}
 
-	public Date getDateFinPublication() {
-		return dateFinPublication;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDateFinPublication(Date dateFinPublication) {
-		this.dateFinPublication = dateFinPublication;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getObjetReclamation() {
-		return objetReclamation;
+	public String getReponse() {
+		return reponse;
 	}
 
-	public void setObjetReclamation(String objetReclamation) {
-		this.objetReclamation = objetReclamation;
+	public void setReponse(String reponse) {
+		this.reponse = reponse;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Long getFamilleReclamation() {
+		return familleReclamation;
+	}
+
+	public void setFamilleReclamation(Long familleReclamation) {
+		this.familleReclamation = familleReclamation;
+	}
+
+	public Long getTypeReclamation() {
+		return typeReclamation;
+	}
+
+	public void setTypeReclamation(Long typeReclamation) {
+		this.typeReclamation = typeReclamation;
 	}
 
 	public String getLienLinkedin() {
@@ -134,23 +153,14 @@ public class ReclamationDto implements IdObject, VersionObject, Auditable, Seria
 		this.lienViadeo = lienViadeo;
 	}
 
-	public String getUrl() {
-		return url;
+	public boolean isFonde() {
+		return fonde;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setFonde(boolean fonde) {
+		this.fonde = fonde;
 	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+	
+	
 
 }
-
-
