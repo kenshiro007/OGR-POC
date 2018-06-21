@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>fr.demo.metier</groupId>
+        <artifactId>resource</artifactId>
+        <version>${revision}</version>
+        <relativePath>..</relativePath>
+    </parent>
+    <groupId>fr.demo.metier.resource</groupId>
+    <artifactId>authentification</artifactId>
+    <packaging>pom</packaging>
+    <name>resource : authentification</name>
+    <modules>
+        
+        <module>authentification-implementation</module>
+        <module>authentification-rest</module>
+        <module>authentification-interface</module>
+    </modules>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>fr.demo.metier.resource</groupId>
+                <artifactId>authentification-interface</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.demo.metier.resource</groupId>
+                <artifactId>authentification-implementation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.demo.metier.resource</groupId>
+                <artifactId>authentification-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>

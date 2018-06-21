@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fr.demo.metier.dao.authentification.UtilisateurMapper">
+
+    <sql id="utilisateurSelect">
+        U.NUMERO_DOSSIER U_NUMERO_DOSSIER,
+        U.MOT_DE_PASSE U_MOT_DE_PASSE,
+        U.MOT_DE_PASSE_SHA512 U_MOT_DE_PASSE_SHA512,
+        U.MOT_DE_PASSE_SEL U_MOT_DE_PASSE_SEL,
+        U.UTILISATEUR_CREATION U_UTILISATEUR_CREATION,
+        U.DATE_CREATION U_DATE_CREATION,
+        U.DATE_EXPIRATION U_DATE_EXPIRATION,
+        U.UTILISATEUR_MODIFICATION U_UTILISATEUR_MODIFICATION,
+        U.DATE_MODIFICATION U_DATE_MODIFICATION,
+        U.NUMERO_VERSION U_NUMERO_VERSION
+    </sql>
+    <resultMap id="utilisateurResult" type="fr.demo.metier.domain.authentification.Utilisateur">
+        <id property="numeroDossier" column="U_NUMERO_DOSSIER"/>
+        <!--<result property="numeroDossier" column="U_NUMERO_DOSSIER"/>-->
+        <result property="motDePasse" column="U_MOT_DE_PASSE"/>
+        <result property="motDePasseSha512" column="U_MOT_DE_PASSE_SHA512"/>
+        <result property="motDePasseSel" column="U_MOT_DE_PASSE_SEL"/>
+        <result property="audit.utilisateurCreation" column="U_UTILISATEUR_CREATION"/>
+        <result property="audit.dateCreation" column="U_DATE_CREATION"/>
+        <result property="dateExpiration" column="U_DATE_EXPIRATION"/>
+        <result property="audit.utilisateurModification" column="U_UTILISATEUR_MODIFICATION"/>
+        <result property="audit.dateModification" column="U_DATE_MODIFICATION"/>
+        <result property="numeroVersion" column="U.NUMERO_VERSION"/>
+    </resultMap>
+
+    <insert id="create" parameterType="fr.demo.metier.domain.authentification.Utilisateur">
+        INSERT INTO UTILISATEUR (NUMERO_DOSSIER, MOT_DE_PASSE, MOT_DE_PASSE_SHA512, MOT_DE_PASSE_SEL, UTILISATEUR_CREATION, DATE_CREATION, NUMERO_VERSION)
+        VALUES (#{numeroDossier}, #{motDePasse}, #{motDePasseSha512}, #{motDePasseSel}, #{audit.utilisateurCreation}, SYSDATE, 0)
+    </insert>
+
+    <select id="getUtilisateur" parameterType="map" resultMap="utilisateurResult">
+        SELECT
+        <include refid="utilisateurSelect"/>
+        FROM UTILISATEUR U WHERE U.NUMERO_DOSSIER = #{numeroDossier} AND U.INDICATEUR_SUPPRESSION = 0
+    </select>
+    <select id="getUtilisateursBybounds" parameterType="map" resultMap="utilisateurResult">
+        SELECT
+        <include refid="utilisateurSelect"/>
+        FROM UTILISATEUR U where U.INDICATEUR_SUPPRESSION = 0
+    </select>
+    <select id="getcountUtilisateur" parameterType="map" resultType="long">
+        SELECT
+        count(*)
+        FROM UTILISATEUR U
+    </select>
+
+</mapper>

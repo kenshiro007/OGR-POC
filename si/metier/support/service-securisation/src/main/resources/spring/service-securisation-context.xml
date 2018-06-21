@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--Pool d'objets RestTokenBase64-->
+    <bean id="restTokenBase64Target" class="fr.demo.metier.service.security.utils.RestTokenBase64" scope="prototype"/>
+    <bean id="restTokenBase64PoolTargetSource" class="org.springframework.aop.target.CommonsPoolTargetSource">
+        <property name="targetBeanName" value="restTokenBase64Target"/>
+        <property name="maxSize" value="50"/>
+        <property name="maxIdle" value="30" />
+        <property name="minIdle" value="15" />
+    </bean>
+    <bean id="restTokenBase64" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="targetSource" ref="restTokenBase64PoolTargetSource"/>
+    </bean>
+
+    <!--Pool d'objets RestTokenDateFormat-->
+    <bean id="restTokenDateFormatTarget" class="fr.demo.metier.service.security.utils.RestTokenDateFormat" scope="prototype"/>
+    <bean id="restTokenDateFormatPoolTargetSource" class="org.springframework.aop.target.CommonsPoolTargetSource">
+        <property name="targetBeanName" value="restTokenDateFormatTarget"/>
+        <property name="maxSize" value="50"/>
+        <property name="maxIdle" value="30" />
+        <property name="minIdle" value="15" />
+    </bean>
+    <bean id="restTokenDateFormat" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="targetSource" ref="restTokenDateFormatPoolTargetSource"/>
+    </bean>
+
+	<!--Pool d'objets SsoAuthenticationUtils-->
+    <bean id="ssoAuthenticationUtilsTarget" class="fr.demo.metier.service.security.utils.SsoAuthenticationUtils" scope="prototype"/>
+    <bean id="ssoAuthenticationUtilsPoolTargetSource" class="org.springframework.aop.target.CommonsPoolTargetSource">
+        <property name="targetBeanName" value="ssoAuthenticationUtilsTarget"/>
+        <property name="maxSize" value="50"/>
+        <property name="maxIdle" value="30" />
+        <property name="minIdle" value="15" />
+    </bean>
+    <bean id="ssoAuthenticationUtils" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="targetSource" ref="ssoAuthenticationUtilsPoolTargetSource"/>
+    </bean>
+</beans>
+

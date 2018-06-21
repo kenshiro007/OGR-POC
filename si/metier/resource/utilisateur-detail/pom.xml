@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>fr.demo.metier</groupId>
+        <artifactId>resource</artifactId>
+        <version>${revision}</version>
+        <relativePath>..</relativePath>
+    </parent>
+    <groupId>fr.demo.metier.resource</groupId>
+    <artifactId>utilisateur-detail</artifactId>
+    <packaging>pom</packaging>
+    <name>resource : utilisateur-detail</name>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>fr.demo.metier.resource</groupId>
+                <artifactId>utilisateur-detail-interface</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.demo.metier.resource</groupId>
+                <artifactId>utilisateur-detail-implementation</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.demo.metier.resource</groupId>
+                <artifactId>utilisateur-detail-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <modules>
+    	<module>utilisateur-detail-interface</module>
+    	<module>utilisateur-detail_implementation</module>
+    	<module>utilisateur-detail-rest</module>
+    </modules>
+</project>

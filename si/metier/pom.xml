@@ -44,6 +44,16 @@
             	<artifactId>rest-support</artifactId>
             	<version>${project.version}</version>
             </dependency>
+            <dependency>
+            	<groupId>fr.demo.metier.support</groupId>
+            	<artifactId>security-support</artifactId>
+            	<version>${project.version}</version>
+            </dependency>
+                        <dependency>
+            	<groupId>fr.demo.metier.support</groupId>
+            	<artifactId>service-securisation</artifactId>
+            	<version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <build>
@@ -112,5 +122,6 @@
     <modules>
     	<module>resource</module>
     	<module>support</module>
+    	<module>server</module>
     </modules>
 </project>

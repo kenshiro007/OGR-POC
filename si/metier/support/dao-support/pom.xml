@@ -5,7 +5,7 @@
         <groupId>fr.demo.metier</groupId>
         <artifactId>support</artifactId>
     	<version>${revision}</version>
-        <relativePath>..</relativePath>
+    	<relativePath>..</relativePath>
     </parent>
     <groupId>fr.demo.metier.support</groupId>
     <artifactId>dao-support</artifactId>

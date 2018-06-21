@@ -12,5 +12,8 @@
   <modules>
   	<module>reclamation</module>
   	<module>referentiel-statique</module>
+  	<module>utilisateur-detail</module>
+
+  	<module>authentification</module>
   </modules>
 </project>

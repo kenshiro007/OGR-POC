@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+    <context:component-scan
+        base-package="fr.demo.metier.rest, fr.demo.metier.configuration, fr.demo.metier.service, 
+        fr.demo.metier.dao, fr.demo.demo.converter, fr.demo.metier.helper, 
+        fr.demo.metier.utils, fr.demo.metier.model, fr.demo.metier.aop, fr.demo.metier.support.transaction,
+         fr.demo.configuration, fr.demo.metier.validator, fr.demo.metier.security">
+    </context:component-scan>
+
+
+    <!-- MyBatis par annotation -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <property name="basePackage" value="fr.demo.metier.dao.document"/>
+    </bean>
+
+    <!-- Utilisation des annotations pour exposer les beans JMX -->
+    <bean id="jmxAttributeSource"
+          class="org.springframework.jmx.export.annotation.AnnotationJmxAttributeSource"/>
+
+    <!-- will create management interface using annotation metadata -->
+    <bean id="assembler"
+          class="org.springframework.jmx.export.assembler.MetadataMBeanInfoAssembler">
+        <property name="attributeSource" ref="jmxAttributeSource"/>
+    </bean>
+
+    <!-- will pick up the ObjectName from the annotation -->
+    <bean id="namingStrategy"
+          class="org.springframework.jmx.export.naming.MetadataNamingStrategy">
+        <property name="attributeSource" ref="jmxAttributeSource"/>
+    </bean>
+
+    <bean id="jmxMBeanExporter" class="org.springframework.jmx.export.MBeanExporter">
+        <property name="assembler" ref="assembler"/>
+        <property name="namingStrategy" ref="namingStrategy"/>
+        <property name="autodetect" value="true"/>
+        <property name="registrationPolicy" value="IGNORE_EXISTING"/>
+        <!--<property name="registrationBehaviorName" value="REGISTRATION_REPLACE_EXISTING"/>-->
+    </bean>
+
+</beans>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+    <context:load-time-weaver/>
+
+    <import resource="classpath:/service-configuration.xml"/>
+
+    <import resource="classpath:/spring/validation-context.xml"/>
+
+    <import resource="classpath:/spring/chiffrement-context.xml"/>
+
+    <import resource="classpath:/spring/service-securisation-context.xml"/>
+
+
+    <!-- appel Cache -->
+    <bean id="requestFactory"
+          class="org.springframework.http.client.SimpleClientHttpRequestFactory"/>
+
+    <bean id="historyAspect" class="fr.demo.metier.aop.HistoryAspect" factory-method="aspectOf"/>
+
+    <bean id="afterCommitAnnotationAspect" class="fr.demo.metier.aop.AfterCommitAnnotationAspect"
+          factory-method="aspectOf"/>
+
+</beans>

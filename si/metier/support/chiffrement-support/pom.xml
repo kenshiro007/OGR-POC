@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>fr.demo.metier</groupId>
+        <artifactId>support</artifactId>
+		<version>${revision}</version>
+        <relativePath>..</relativePath>
+    </parent>
+    <groupId>fr.demo.metier.support</groupId>
+    <artifactId>chiffrement-support</artifactId>
+    <packaging>jar</packaging>
+    <name>support : chiffrement-support</name>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>fr.demo.metier.support</groupId>
+            <artifactId>model-support</artifactId>
+        </dependency>
+<!--         <dependency>
+            <groupId>blowfish</groupId>
+            <artifactId>blowfish</artifactId>
+            <scope>compile</scope>
+        </dependency> -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.53</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

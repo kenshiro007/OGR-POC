@@ -1,0 +1,32 @@
+<validation-config xmlns="http://jboss.org/xml/ns/javax/validation/configuration"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://jboss.org/xml/ns/javax/validation/configuration" version="1.1">
+    <constraint-mapping>/constraints-referentielstatique.xml</constraint-mapping>
+    <constraint-mapping>/constraints-candidatureoffre.xml</constraint-mapping> 
+    <constraint-mapping>/constraints-comptecadre.xml</constraint-mapping>
+    <constraint-mapping>/constraints-compteetablissement.xml</constraint-mapping>
+    <constraint-mapping>/constraints-comptepersonnel.xml</constraint-mapping>
+    <constraint-mapping>/constraints-utilisateuradep.xml</constraint-mapping>
+    <constraint-mapping>/constraints-lm.xml</constraint-mapping>
+    <constraint-mapping>/constraints-habilitation.xml</constraint-mapping>
+    <constraint-mapping>/constraints-profil.xml</constraint-mapping>
+    <constraint-mapping>/constraints-offre.xml</constraint-mapping>
+    <constraint-mapping>/constraints-cadrerechercheoffre.xml</constraint-mapping>
+    <constraint-mapping>/constraints-interlocuteurrechercheprofil.xml</constraint-mapping>
+    <constraint-mapping>/constraints-consultantrechercheprofil.xml</constraint-mapping>
+    <constraint-mapping>/constraints-modulesalaire.xml</constraint-mapping> 
+    <constraint-mapping>/constraints-rechercheprofil.xml</constraint-mapping>
+    <constraint-mapping>/constraints-abonnement.xml</constraint-mapping>
+   <constraint-mapping>/constraints-echange-profil.xml</constraint-mapping>
+    <constraint-mapping>/constraints-demandeihm.xml</constraint-mapping>
+    <constraint-mapping>/constraints-panieroffre.xml</constraint-mapping>
+    <constraint-mapping>/constraints-temps.xml</constraint-mapping>
+    <constraint-mapping>/constraints-atelier.xml</constraint-mapping>
+    <constraint-mapping>/constraints-lieu.xml</constraint-mapping>
+    <constraint-mapping>/constraints-authentification.xml</constraint-mapping>
+    <constraint-mapping>/constraints-echange-profil-consultant.xml</constraint-mapping>
+    <constraint-mapping>/constraints-adresse.xml</constraint-mapping>
+    <constraint-mapping>/constraints-profilcadre.xml</constraint-mapping>
+    <constraint-mapping>/constraints-cvfichier.xml</constraint-mapping>
+    <constraint-mapping>/constraints-competence.xml</constraint-mapping>
+</validation-config>

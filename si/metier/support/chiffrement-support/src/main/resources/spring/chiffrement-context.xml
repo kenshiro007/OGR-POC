@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--<bean id="simpleTraceInterceptor" class="org.springframework.aop.interceptor.SimpleTraceInterceptor">-->
+        <!--<property name="useDynamicLogger" value="true"/>-->
+    <!--</bean>-->
+    <!--<bean id="debugInterceptor" class="org.springframework.aop.interceptor.DebugInterceptor">-->
+        <!--<property name="useDynamicLogger" value="true"/>-->
+    <!--</bean>-->
+
+    <!--Pool d'objets BlowFishUtils-->
+    <bean id="blowfishUtilsTarget" class="fr.demo.metier.utils.BlowFishUtils" scope="prototype">
+        <property name="sha512Utils" ref="sha512Utils"/>
+    </bean>
+    <bean id="blowfishUtilsPoolTargetSource" class="org.springframework.aop.target.CommonsPoolTargetSource">
+        <property name="targetBeanName" value="blowfishUtilsTarget"/>
+        <property name="maxSize" value="50"/>
+        <property name="maxIdle" value="30"/>
+        <property name="minIdle" value="15"/>
+    </bean>
+    <bean id="blowfishUtils" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="targetSource" ref="blowfishUtilsPoolTargetSource"/>
+        <!--<property name="interceptorNames">-->
+            <!--<list>-->
+                <!--<value>simpleTraceInterceptor</value>-->
+                <!--<value>debugInterceptor</value>-->
+            <!--</list>-->
+        <!--</property>-->
+    </bean>
+
+    <!--Pool d'objets BASE64Encoder-->
+    <bean id="base64EncoderTarget" class="sun.misc.BASE64Encoder" scope="prototype"/>
+    <bean id="base64EncoderPoolTargetSource" class="org.springframework.aop.target.CommonsPoolTargetSource">
+        <property name="targetBeanName" value="base64EncoderTarget"/>
+        <property name="maxSize" value="50"/>
+        <property name="maxIdle" value="30" />
+        <property name="minIdle" value="15" />
+    </bean>
+    <bean id="base64Encoder" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="targetSource" ref="base64EncoderPoolTargetSource"/>
+    </bean>
+
+    <!--Pool d'objets BASE64Decoder-->
+    <bean id="base64DecoderTarget" class="sun.misc.BASE64Decoder" scope="prototype"/>
+    <bean id="base64DecoderPoolTargetSource" class="org.springframework.aop.target.CommonsPoolTargetSource">
+        <property name="targetBeanName" value="base64DecoderTarget"/>
+        <property name="maxSize" value="50"/>
+        <property name="maxIdle" value="30" />
+        <property name="minIdle" value="15" />
+    </bean>
+    <bean id="base64Decoder" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="targetSource" ref="base64DecoderPoolTargetSource"/>
+    </bean>
+
+    <bean id="aesUtils" class="fr.demo.metier.utils.AesUtils">
+        <property name="base64Encoder" ref="base64Encoder"/>
+        <property name="base64Decoder" ref="base64Decoder"/>
+    </bean>
+
+    <bean id="sha512Utils" class="fr.demo.metier.utils.Sha512Utils">
+    </bean>
+</beans>

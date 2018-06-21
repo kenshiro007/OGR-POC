@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<constraint-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:schemaLocation="http://jboss.org/xml/ns/javax/validation/mapping validation-mapping-1.0.xsd"
+                     xmlns="http://jboss.org/xml/ns/javax/validation/mapping">
+
+    <constraint-definition annotation="fr.demo.metier.validator.constraints.authentification.TokenValidConstraint">
+        <validated-by include-existing-validators="false">
+            <value>fr.demo.metier.validator.authentification.TokenValidConstraintValidator</value>
+        </validated-by>
+    </constraint-definition>
+
+    <constraint-definition annotation="fr.demo.metier.validator.constraints.authentification.PasswordSizeConstraint">
+        <validated-by include-existing-validators="false">
+            <value>fr.demo.metier.validator.authentification.PasswordSizeConstraintValidator</value>
+        </validated-by>
+    </constraint-definition>
+
+    <constraint-definition annotation="fr.demo.metier.validator.constraints.authentification.AuMoinsUnChiffreConstraint">
+        <validated-by include-existing-validators="false">
+            <value>fr.demo.metier.validator.authentification.AuMoinsUnChiffreConstraintValidator</value>
+        </validated-by>
+    </constraint-definition>
+
+    <constraint-definition annotation="fr.demo.metier.validator.constraints.authentification.AuMoinsUneMajusculeConstraint">
+        <validated-by include-existing-validators="false">
+            <value>fr.demo.metier.validator.authentification.AuMoinsUneMajusculeConstraintValidator</value>
+        </validated-by>
+    </constraint-definition>
+
+    <constraint-definition annotation="fr.demo.metier.validator.constraints.authentification.AuMoinsUneMinusculeConstraint">
+        <validated-by include-existing-validators="false">
+            <value>fr.demo.metier.validator.authentification.AuMoinsUneMinusculeConstraintValidator</value>
+        </validated-by>
+    </constraint-definition>
+
+    <constraint-definition annotation="fr.demo.metier.validator.constraints.authentification.AuMoinsUnSpecialConstraint">
+        <validated-by include-existing-validators="false">
+            <value>fr.demo.metier.validator.authentification.AuMoinsUnSpecialConstraintValidator</value>
+        </validated-by>
+    </constraint-definition>
+
+</constraint-mappings>

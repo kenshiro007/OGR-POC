@@ -75,6 +75,7 @@
    <commons-codec.version>1.10</commons-codec.version>
    <commons-pool2.version>2.4.1</commons-pool2.version>
    <apache.poi.version>3.11</apache.poi.version>
+   <blowfishj.version>2.15</blowfishj.version>
   
   </properties>
   
@@ -717,6 +718,11 @@
       <version>${blowfish.version}</version>
     </dependency>
 
+	<dependency>
+	    <groupId>io.github.dheid</groupId>
+	    <artifactId>blowfishj</artifactId>
+	    <version>${blowfishj.version}</version>
+	</dependency>
     <dependency>
       <groupId>com.googlecode.concurrentlinkedhashmap</groupId>
       <artifactId>concurrentlinkedhashmap-lru</artifactId>
@@ -739,7 +745,6 @@
       <artifactId>poi-ooxml</artifactId>
       <version>${apache.poi.version}</version>
     </dependency>
-    
 	</dependencies>
 </dependencyManagement>
 </project>

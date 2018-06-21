@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:jee="http://www.springframework.org/schema/jee"
+	   xmlns:aop="http://www.springframework.org/schema/aop"
+	   xmlns:tx="http://www.springframework.org/schema/tx"
+	   xsi:schemaLocation="
+	  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+      http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+      http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+      http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<jee:jndi-lookup id="dataSource" jndi-name="jdbc/sdsi" expected-type="javax.sql.DataSource"/>
+
+	<aop:config />
+
+  <tx:annotation-driven transaction-manager="transactionManager"/>
+
+  <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+
+  <bean id="txAttributeSource" class="fr.demo.metier.dao.core.RollbackForTransactionAttributeSource" />
+
+	<bean id="txInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManagerBeanName" value="transactionManager" />
+		<property name="transactionAttributeSource" ref="txAttributeSource" />
+	</bean>
+
+	<bean class="org.springframework.transaction.interceptor.BeanFactoryTransactionAttributeSourceAdvisor">
+		<property name="transactionAttributeSource" ref="txAttributeSource" />
+		<property name="adviceBeanName" value="txInterceptor" />
+	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:mybatis/*.xml</value>
+				<value>classpath*:mybatis-ods/*.xml</value>
+			</list>
+		</property>
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+
+</beans>

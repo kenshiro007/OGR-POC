@@ -6,7 +6,7 @@
     <version>${revision}</version>
     <relativePath>..</relativePath>
   </parent>
-    <groupId>fr.demo.metier</groupId>
+  <groupId>fr.demo.metier</groupId>
   <artifactId>support</artifactId>
   <packaging>pom</packaging>
   <modules>
@@ -16,5 +16,9 @@
   	<module>rest-support</module>
   	
   	<module>property</module>
+  	<module>service-configuration</module>
+  	<module>service-securisation</module>
+  	<module>security-support</module>
+  	<module>chiffrement-support</module>
   </modules>
 </project>

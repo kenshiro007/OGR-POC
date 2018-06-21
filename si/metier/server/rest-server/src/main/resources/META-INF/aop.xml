@@ -1,0 +1,78 @@
+<!DOCTYPE aspectj PUBLIC "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+
+    <!--<weaver options="-verbose -debug -showWeaveInfo -Xset:weaveJavaxPackages=true">-->
+    <weaver options="-Xset:weaveJavaxPackages=true">
+        <include within="fr.demo.metier.rest..*"/>
+        <include within="fr.demo.metier.dao..*.impl.*"/>
+        <include within="fr.demo.metier.aop.*"/>
+        <include within="fr.demo..*"/>
+    </weaver>
+
+    <aspects>
+
+        <aspect name="fr.demo.metier.aop.AuditablePropagation"/>
+
+        <aspect name="fr.demo.metier.aop.HistoryAspect"/>
+
+        <aspect name="fr.demo.metier.aop.PrintableCharacter"/>
+
+        <aspect name="fr.demo.metier.aop.AfterCommitAnnotationAspect"/>
+
+        <!-- monitoring des classes de securité -->
+        <!--<concrete-aspect name="fr.demo.metier.aop.__ServiceSecurity__PerformanceMonitorAspect"
+                         extends="fr.demo.metier.aop.monitoring.AbstractPerformanceMonitorAspect"
+                         precedence="*">
+            <pointcut name="monitor" expression="execution(* fr.demo.metier.service.security..*.*(..))"/>
+        </concrete-aspect>-->
+
+        <!-- monitoring de l'authentification -->
+        <!--<concrete-aspect name="fr.demo.metier.aop.__AuthentificationServiceImpl__PerformanceMonitorAspect"
+                         extends="fr.demo.metier.aop.monitoring.AbstractPerformanceMonitorAspect"
+                         precedence="*">
+            <pointcut name="monitor"
+                      expression="execution(* fr.demo.metier.service.authentification.impl.AuthentificationServiceImpl.get*(..))"/>
+        </concrete-aspect>-->
+
+        <!-- monitoring du service 'utilisateur' -->
+        <!--<concrete-aspect name="fr.demo.metier.aop.__UtilisateurServiceImpl__PerformanceMonitorAspect"
+                         extends="fr.demo.metier.aop.monitoring.AbstractPerformanceMonitorAspect"
+                         precedence="*">
+            <pointcut name="monitor"
+                      expression="execution(* fr.demo.metier.service.utilisateur.impl.UtilisateurServiceImpl.getDetail*(..))"/>
+        </concrete-aspect>-->
+
+        <!--++++++++++++++++++ Validation AfterCommitExecutorImpl PLX +++++++++++++++++++++++++++++++++++++++++++++++-->
+        <!-- monitoring de l'after commit executor -->
+        <!--<concrete-aspect name="fr.demo.metier.aop.__AfterCommitExecutorImpl__PerformanceMonitorAspect"
+                         extends="fr.demo.metier.aop.monitoring.AbstractPerformanceMonitorAspect"
+                         precedence="*">
+            <pointcut name="monitor"
+                      expression="execution(* fr.demo.metier.support.transaction.AfterCommitExecutorImpl.*(..))"/>
+        </concrete-aspect>-->
+        <!-- monitoring du purge & reload cache offre -->
+        <!--<concrete-aspect name="fr.demo.metier.aop.__OffreCacheOrchestrationServiceImpl__PerformanceMonitorAspect"
+                         extends="fr.demo.metier.aop.monitoring.AbstractPerformanceMonitorAspect"
+                         precedence="*">
+            <pointcut name="monitor"
+                      expression="execution(* fr.demo.metier.service.offrecacheorchestration.impl.OffreCacheOrchestrationServiceImpl.purgeAndReload(..))"/>
+        </concrete-aspect>-->
+        <!-- monitoring de l'indexation offre -->
+        <!--<concrete-aspect name="fr.demo.metier.aop.__OffreIndexingOrchestrationServiceImpl__PerformanceMonitorAspect"
+                         extends="fr.demo.metier.aop.monitoring.AbstractPerformanceMonitorAspect"
+                         precedence="*">
+            <pointcut name="monitor"
+                      expression="execution(* fr.demo.metier.service.offreindexingorchestration.impl.OffreIndexingOrchestrationServiceImpl.indexOffre(..))"/>
+        </concrete-aspect>-->
+        <!-- monitoring de l'indexation cv -->
+        <!--<concrete-aspect name="fr.demo.metier.aop.__CvIndexingOrchestrationServiceImpl__PerformanceMonitorAspect"
+                         extends="fr.demo.metier.aop.monitoring.AbstractPerformanceMonitorAspect"
+                         precedence="*">
+            <pointcut name="monitor"
+                      expression="execution(* fr.demo.metier.service.cvindexingorchestration.impl.CvIndexingOrchestrationServiceImpl.indexCv(..))"/>
+        </concrete-aspect>-->
+        <!--++++++++++++++++++ Validation AfterCommitExecutorImpl PLX +++++++++++++++++++++++++++++++++++++++++++++++-->
+
+    </aspects>
+
+</aspectj>

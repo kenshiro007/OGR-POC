@@ -17,7 +17,7 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>fr.apec.metier.resource</groupId>
+                <groupId>fr.demo.metier.resource</groupId>
                 <artifactId>referentiel-statique-interface</artifactId>
                 <version>${project.version}</version>
             </dependency>

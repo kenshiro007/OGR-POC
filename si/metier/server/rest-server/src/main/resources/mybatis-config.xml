@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ <!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="true" />
+		<setting name="lazyLoadingEnabled" value="true" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="100" />
+		<setting name="safeRowBoundsEnabled" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="false" />
+		<setting name="localCacheScope" value="SESSION" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />
+	</settings>
+	
+    <typeHandlers>
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumCadreCategorie" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumCadreSituation" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumCadreStatut" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumCentreApec" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumCvType" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumProfilStatut" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumOuiNon" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumOffreStatut" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumParcoursOffre" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumSituCompte" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumFormatEnvoi" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumTypeContrat" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumAbonnement" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumMotifFermetureAbonnement" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumStatutCritere" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumPlageHoraire" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumDemandeMotif" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+     	<typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumDemandeOrigine" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+     	<typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumCentreFormationApec" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+     	<typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumStatutInscriptionAtelier" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.dto.doublonoffre.EnumCalculDoublonStatut" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.compteetablissement.EnumInexistantPrestataire" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.compteetablissement.EnumCessation" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.model.referentielstatique.EnumProCadNiveauExperience" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+        <typeHandler javaType="fr.demo.metier.dto.refstatiqueadmin.EnumIndicateurValidite" handler="fr.demo.metier.dao.referentielstatique.handler.ReferentielStatiqueEnumTypeHandler" />
+    </typeHandlers>
+    
+    <!--<plugins>-->
+        <!--<plugin interceptor=""></plugin>-->
+    <!--</plugins>-->
+</configuration>

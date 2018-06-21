@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.2.xsd"
+       profile="security-activated">
+
+   <!--  <security:http pattern="/rest/reclamation/**" security="none"/> -->
+    
+    <!--<security:debug/>-->
+
+    <security:global-method-security pre-post-annotations="enabled">
+        <!--<security:expression-handler ref="restExpressionHandler"/>-->
+    </security:global-method-security>
+
+    <bean id="restExpressionHandler" class="fr.demo.metier.service.security.impl.RestWebSecurityExpressionHandler">
+        <!--<property name="permissionEvaluator" ref="restPermissionEvaluator"/>-->
+    </bean>
+
+    <!--<bean id="restPermissionEvaluator" class="fr.demo.metier.service.security.impl.RestPermissionEvaluator"/>-->
+
+    <security:http realm="API Demo sécurisée"
+                   use-expressions="true"
+                   create-session="stateless"
+                   entry-point-ref="unauthorizedEntryPoint"
+                   authentication-manager-ref="restAuthenticationManager">
+
+        <security:expression-handler ref="restExpressionHandler"/>
+
+        <security:anonymous enabled="true"/>
+
+        <security:custom-filter ref="restAuthenticationFilter" position="FORM_LOGIN_FILTER"/>
+
+        <!-- reclamation - phase 2 sécurisation (exposition uniquement en interne) -->
+        <security:intercept-url method="POST" pattern="/rest/reclamation/**" access="isAuthenticated()"/>
+        <security:intercept-url method="PUT" pattern="/rest/reclamation/**" access="isAuthenticated()"/>
+        <security:intercept-url method="GET" pattern="/rest/reclamation/**" access="isAuthenticated()"/>
+
+	</security:http>
+
+</beans>

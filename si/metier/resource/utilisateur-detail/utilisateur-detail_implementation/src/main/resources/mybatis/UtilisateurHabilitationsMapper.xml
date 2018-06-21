@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fr.demo.metier.dao.utilisateurdetail.UtilisateurHabilitationsMapper">
+
+  <!--<cache type="org.mybatis.caches.ehcache.LoggingEhcache">-->
+  <!--<property name="maxEntriesLocalHeap" value="20000"/>-->
+  <!--<property name="maxEntriesLocalDisk" value="1000000"/>-->
+  <!--<property name="memoryStoreEvictionPolicy" value="LRU"/>-->
+  <!--</cache>-->
+
+  <resultMap id="utilisateurResult" type="fr.demo.metier.domain.utilisateurdetail.UtilisateurHabilitations">
+    <id property="numeroDossier" column="U_NUMERO_DOSSIER"/>
+    <result property="idTechnique" column="ID_TECHNIQUE"/>
+    <result property="nom" column="NOM"/>
+    <result property="typeUser" column="U_TYPE_USER"/>
+  </resultMap>
+
+  <select id="getUtilisateurPersonnelApecOuGenerique" parameterType="map" resultMap="utilisateurResult">
+        SELECT
+        U.NUMERO_DOSSIER U_NUMERO_DOSSIER, 1 AS ID_TECHNIQUE, U.NUMERO_DOSSIER U_TYPE_USER, U.NUMERO_DOSSIER NOM
+        FROM UTILISATEUR U
+        WHERE U.NUMERO_DOSSIER = #{numeroDossier}
+        AND U.INDICATEUR_SUPPRESSION = 0
+        AND U.NUMERO_DOSSIER IN ('USER_ADEP', 'VISI_FRONT', 'INFA', 'INTRANET')
+       UNION
+        SELECT
+        U.NUMERO_DOSSIER U_NUMERO_DOSSIER, TO_NUMBER(ID_PERSONNEL) ID_TECHNIQUE, 'PERSONNEL' AS U_TYPE_USER, PE.LOGIN_ANNUAIRE NOM
+        FROM UTILISATEUR U, PERSONNEL PE
+        WHERE U.NUMERO_DOSSIER = #{numeroDossier}
+        AND U.INDICATEUR_SUPPRESSION = 0
+        AND PE.NUMERO_RH = U.NUMERO_DOSSIER
+    </select>
+
+  <select id="getUtilisateurPersonnelApecByActiveDirectoryLogin" parameterType="map" resultMap="utilisateurResult">
+    SELECT
+    U.NUMERO_DOSSIER U_NUMERO_DOSSIER, TO_NUMBER(ID_PERSONNEL) ID_TECHNIQUE, 'PERSONNEL' AS U_TYPE_USER, PE.LOGIN_ANNUAIRE NOM
+    FROM UTILISATEUR U, PERSONNEL PE
+    WHERE PE.LOGIN_ANNUAIRE = #{activeDirectoryLogin}
+    AND PE.INDICATEUR_PRESENCE = 1
+    AND U.INDICATEUR_SUPPRESSION = 0
+    AND PE.NUMERO_RH = U.NUMERO_DOSSIER
+  </select>
+
+  <select id="getUtilisateurClient" parameterType="map" resultMap="utilisateurResult">
+      SELECT U.NUMERO_DOSSIER U_NUMERO_DOSSIER, I.ID_TECHNIQUE ID_TECHNIQUE, I.U_TYPE_USER U_TYPE_USER, I.NOM NOM
+      FROM (SELECT ID_COMPTE AS ID_TECHNIQUE, NOM AS NOM, NUMERO_COMPTE AS NUMERO_COMPTE, DECODE(ID_NOM_STATUT_ACTUEL,
+        20054, 'JD', 20055, 'JD', 'CADRE') AS U_TYPE_USER FROM CADRE
+        UNION
+        SELECT ID_INTERLOCUTEUR AS ID_TECHNIQUE, NOM AS NOM, NUMERO_COMPTE AS NUMERO_COMPTE, 'INTERLOCUTEUR' AS
+        U_TYPE_USER FROM INTERLOCUTEUR) I, UTILISATEUR U
+        WHERE U.NUMERO_DOSSIER = #{numeroDossier}
+        AND U.INDICATEUR_SUPPRESSION = 0
+        AND I.NUMERO_COMPTE (+) = U.NUMERO_DOSSIER
+    </select>
+
+  <select id="getUserOrganisation" parameterType="map" statementType="CALLABLE" resultType="Long">
+        SELECT habilitation_pkg.F_USER_ORGANISATION(#{numeroDossier}) FROM DUAL
+    </select>
+
+  <select id="getCodeHabilisationsPourPersonnelApecOuGenerique" parameterType="map" statementType="CALLABLE" resultType="String">
+        SELECT habilitation_pkg.F_HAB_LISTE_BINAIRE_NUM_DOSS(#{numeroDossier}) FROM DUAL
+    </select>
+
+  <select id="getCodeHabilitationsPourClient" parameterType="map" statementType="CALLABLE" resultType="String">
+        SELECT habilitation_pkg.F_HAB_LISTE_BINAIRE_ORG(#{userOrganisation}, #{exclusions}) FROM DUAL
+    </select>
+
+  <select id="getCodeHabilitationsPourHabilitations" parameterType="map" statementType="CALLABLE" resultType="String">
+        SELECT habilitation_pkg.F_HAB_LISTE_BINAIRE_LISTE_HAB(#{listeHabilitations}) FROM DUAL
+    </select>
+
+</mapper>

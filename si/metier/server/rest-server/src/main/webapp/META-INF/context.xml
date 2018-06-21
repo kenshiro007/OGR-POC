@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Context>
+
+    <WatchedResource>WEB-INF/web.xml</WatchedResource>
+
+    <Transaction factory="org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory"/>
+
+    <Resource name="TransactionManager"
+              auth="Container"
+              type="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+              factory="org.apache.naming.factory.BeanFactory"/>
+
+    <!-- Spring LoadTimeWeaver Support for the Tomcat server. -->
+    <Loader loaderClass="org.springframework.instrument.classloading.tomcat.TomcatInstrumentableClassLoader"/>
+    <!-- useSystemClassLoaderAsParent="false"/> -->
+
+    <!-- Data sources -->
+
+    <ResourceLink name="jdbc/sdsi"
+                  global="jdbc/sdsi"
+                  auth="Container"
+                  type="javax.sql.DataSource"/>
+
+    <ResourceLink name="repsfdc.schema" global="repsfdc.schema" type="java.lang.String"/>
+    <ResourceLink name="repsfdc.crmMailDomain" global="repsfdc.crmMailDomain" type="java.lang.String"/>
+
+    <!-- adresse -->
+    <ResourceLink name="geoloc.street.solr.url" global="geoloc.street.solr.url" type="java.lang.String"/>
+    <ResourceLink name="geoloc.house.solr.url" global="geoloc.house.solr.url" type="java.lang.String"/>
+    <ResourceLink name="geoloc.street.success.ratio" global="geoloc.street.success.ratio" type="java.lang.Float"/>
+
+    <!-- Siretisation -->
+    <ResourceLink name="siretisation.server.url" global="siretisation.server.url" type="java.lang.String"/>
+    <ResourceLink name="siretisation.server.identification" global="siretisation.server.identification"
+                  type="java.lang.String"/>
+    <ResourceLink name="envoi.email.asynchrone.development.mode" global="envoi.email.asynchrone.development.mode"
+                  type="java.lang.Boolean"/>
+
+    <!-- Siretisation -->
+    <ResourceLink name="siretisation.server.url" global="siretisation.server.url" type="java.lang.String"/>
+    <ResourceLink name="siretisation.server.identification" global="siretisation.server.identification"
+                  type="java.lang.String"/>
+
+    <!-- URL de solr sur le schema b2c_position_core, utilise par le service d'indexation des offres -->
+    <ResourceLink name="offre.solr.ecriture.url" global="offre.solr.ecriture.url" type="java.lang.String"/>
+    <ResourceLink name="offre.fo.indexing.activation" global="offre.fo.indexing.activation" type="java.lang.Boolean"/>
+    <ResourceLink name="offre.bo.indexing.activation" global="offre.bo.indexing.activation" type="java.lang.Boolean"/>
+
+    <ResourceLink name="geolocalisation.offre.url" global="geolocalisation.offre.url" type="java.lang.String"/>
+
+    <!-- URL de solr sur le schema b2c_position_core, utilise par le service de recherche des offres -->
+    <ResourceLink name="offre.solr.lecture.url" global="offre.solr.lecture.url" type="java.lang.String"/>
+
+    <!-- URL du web service proxem, utilise par le service d'indexation et de recherche des offres -->
+    <ResourceLink name="docannotator.url" global="docannotator.url" type="java.lang.String"/>
+
+    <!-- URL de solr sur le schema category_core, utilise par le service de recherche des offres -->
+    <ResourceLink name="category.solr.url" global="category.solr.url" type="java.lang.String"/>
+
+    <!-- Propriete utilisee par le service de recherche des offres -->
+    <ResourceLink name="recherche.offre.semantic.activation" global="recherche.offre.semantic.activation"
+                  type="java.lang.Boolean"/>
+
+    <!-- Propriete utilisee par le service de recherche des offres -->
+    <ResourceLink name="recherche.offre.geoloc.activation" global="recherche.offre.geoloc.activation"
+                  type="java.lang.Boolean"/>
+
+    <!-- URL du web service proxem, utilise par le service d'analyse semantique des offres -->
+    <ResourceLink name="positionSemanticAnalyzer.url" global="positionSemanticAnalyzer.url" type="java.lang.String"/>
+
+    <!-- analyse sémantique -->
+    <ResourceLink name="cvannotator.url" global="cvannotator.url" type="java.lang.String"/>
+    <ResourceLink name="offreannotator.url" global="offreannotator.url" type="java.lang.String"/>
+    <ResourceLink name="validationjuridique.url" global="validationjuridique.url" type="java.lang.String"/>
+    <ResourceLink name="parsingcv.url" global="parsingcv.url" type="java.lang.String"/>
+    <ResourceLink name="parsingcompetence.url" global="parsingcompetence.url" type="java.lang.String"/>
+    <ResourceLink name="semantic.provider.temis" global="semantic.provider.temis" type="java.lang.Boolean"/>
+    <ResourceLink name="semantic.provider.temis.validationjuridique"
+                  global="semantic.provider.temis.validationjuridique"
+                  type="java.lang.Boolean"/>
+    <ResourceLink name="service.temis.codejob.url" global="service.temis.codejob.url" type="java.lang.String"/>
+
+    <!-- Propriete utilisee par le service d'indexation des offres -->
+    <ResourceLink name="offre.indexing.semantic.activation" global="offre.indexing.semantic.activation"
+                  type="java.lang.Boolean"/>
+
+    <!-- Propriete utilisee par le service d'indexation des CV -->
+    <ResourceLink name="cv.indexing.semantic.activation" global="cv.indexing.semantic.activation"
+                  type="java.lang.Boolean"/>
+
+    <!-- Propriete utilisee par le service d'indexation des Profil -->
+    <ResourceLink name="profil.indexing.semantic.activation" global="profil.indexing.semantic.activation"
+                  type="java.lang.Boolean"/>
+    <!-- URL de solr sur le schema search_profile_core, utilise par le service d'indexation des Profil -->
+    <ResourceLink name="profil.solr.ecriture.url" global="profil.solr.ecriture.url" type="java.lang.String"/>
+
+    <!-- URL de solr sur le schema search_profile_core, utilise par le service de recherche des Profil -->
+    <ResourceLink name="profil.solr.lecture.url" global="profil.solr.lecture.url" type="java.lang.String"/>
+
+    <!-- Proprietes utilisees par le service de recherche des Profil -->
+    <ResourceLink name="recherche.profil.maxNumberOfHits" global="recherche.profil.maxNumberOfHits"
+                  type="java.lang.Integer"/>
+    <ResourceLink name="recherche.profil.highlightedFields" global="recherche.profil.highlightedFields"
+                  type="java.lang.String"/>
+    <ResourceLink name="recherche.profil.andModeActive" global="recherche.profil.andModeActive"
+                  type="java.lang.Boolean"/>
+    <ResourceLink name="recherche.profil.boostTitreCv" global="recherche.profil.boostTitreCv" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostContenuCv" global="recherche.profil.boostContenuCv"
+                  type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostPointCle" global="recherche.profil.boostPointCle" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostTitreFormationRecente" global="recherche.profil.boostTitreFormationRecente" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostTitreExperienceRecente" global="recherche.profil.boostTitreExperienceRecente" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostObjectifProfessionel" global="recherche.profil.boostObjectifProfessionel" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostAtout" global="recherche.profil.boostAtout" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostTitreFormation" global="recherche.profil.boostTitreFormation" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostTitreExperience" global="recherche.profil.boostTitreExperience" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostNomEtablissementFormation" global="recherche.profil.boostNomEtablissementFormation" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostNomEntrepriseExperience" global="recherche.profil.boostNomEntrepriseExperience" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostNomCompetenceLibre" global="recherche.profil.boostNomCompetenceLibre" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostDescriptionCompetenceLibre" global="recherche.profil.boostDescriptionCompetenceLibre" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostTitreProjet" global="recherche.profil.boostTitreProjet" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.boostDescriptionProjet" global="recherche.profil.boostDescriptionProjet" type="java.lang.Float"/>
+    <ResourceLink name="recherche.profil.semantic.rechercheSemantiqueActivee"
+                  global="recherche.profil.semantic.rechercheSemantiqueActivee" type="java.lang.Boolean"/>
+    <ResourceLink name="recherche.profil.phrase.phraseBoostingActif"
+                  global="recherche.profil.phrase.phraseBoostingActif"
+                  type="java.lang.Boolean"/>
+    <ResourceLink name="recherche.profil.phrase.phraseBoostingFacteur"
+                  global="recherche.profil.phrase.phraseBoostingFacteur"
+                  type="java.lang.Float"/>
+
+    <!-- Propriete temporaire permettant d'activer ou non le check de l'upload du CV. Mettre a false pour ignorer l'upload ! -->
+    <ResourceLink name="tmp.cv.verif.upload.activation" global="tmp.cv.verif.upload.activation"
+                  type="java.lang.Boolean"/>
+    <ResourceLink name="server.upload.nousrejoindre.location.tmp.folder"
+                  global="server.upload.nousrejoindre.location.tmp.folder" type="java.lang.String"/>
+    <ResourceLink name="server.upload.photo-profil.location.tmp.folder"
+                  global="server.upload.photo-profil.location.tmp.folder" type="java.lang.String"/>
+    <ResourceLink name="server.upload.photo-profil.location.folder"
+                  global="server.upload.photo-profil.location.folder"
+                  type="java.lang.String"/>
+    <ResourceLink name="server.upload.photo-profil-redimensionnee.location.tmp.folder"
+                  global="server.upload.photo-profil-redimensionnee.location.tmp.folder" type="java.lang.String"/>
+    <ResourceLink name="server.upload.photo-profil-redimensionnee.location.folder"
+                  global="server.upload.photo-profil-redimensionnee.location.folder"
+                  type="java.lang.String"/>
+    <ResourceLink name="server.upload.nousrejoindre.location.folder"
+                  global="server.upload.nousrejoindre.location.folder"
+                  type="java.lang.String"/>
+    <ResourceLink name="server.upload.cv.location.tmp.folder" global="server.upload.cv.location.tmp.folder"
+                  type="java.lang.String"/>
+    <ResourceLink name="server.upload.cv.location.folder" global="server.upload.cv.location.folder"
+                  type="java.lang.String"/>
+    <ResourceLink name="server.upload.logo.location.tmp.folder" global="server.upload.logo.location.tmp.folder"
+                  type="java.lang.String"/>
+    <ResourceLink name="server.upload.logo.location.folder" global="server.upload.logo.location.folder"
+                  type="java.lang.String"/>
+    <ResourceLink name="server.upload.validation.antivirus" global="server.upload.validation.antivirus"
+                  type="java.lang.Boolean"/>
+    <ResourceLink name="swagger.api.basepath" global="swagger.api.basepath" type="java.lang.String"/>
+
+    <!-- Propriete temporaire permettant d'activer ou non le check de l'upload du logo. Mettre a false pour ignorer l'upload ! -->
+    <ResourceLink name="tmp.logo.verif.upload.activation" global="tmp.logo.verif.upload.activation"
+                  type="java.lang.Boolean"/>
+
+    <!-- Propriete utilisee par le service etablissement pour l'upload de logo -->
+    <ResourceLink name="logo.path.relatif.folder.output" global="logo.path.relatif.folder.output"
+                  type="java.lang.String"/>
+    <ResourceLink name="logo.name.prefixe" global="logo.name.prefixe" type="java.lang.String"/>
+    <ResourceLink name="logo.path.max.length" global="logo.path.max.length" type="java.lang.Integer"/>
+    <ResourceLink name="logo.name.max.extension.size" global="logo.name.max.extension.size" type="java.lang.Integer"/>
+
+    <!-- Propriete utilisee par le service templating -->
+    <ResourceLink name="templating.context.imgsLink" global="templating.context.imgsLink" type="java.lang.String"/>
+    <ResourceLink name="templating.context.imgsMount" global="templating.context.imgsMount" type="java.lang.String"/>
+    <ResourceLink name="templating.context.envCadre" global="templating.context.envCadre" type="java.lang.String"/>
+    <ResourceLink name="templating.context.envJD" global="templating.context.envJD" type="java.lang.String"/>
+    <ResourceLink name="templating.context.envPortail" global="templating.context.envPortail" type="java.lang.String"/>
+    <ResourceLink name="templating.context.envRecruteur" global="templating.context.envRecruteur"
+                  type="java.lang.String"/>
+    <ResourceLink name="templating.context.passwordLinkCadre" global="templating.context.passwordLinkCadre"
+                  type="java.lang.String"/>
+    <ResourceLink name="templating.context.passwordLinkRecruteur" global="templating.context.passwordLinkRecruteur"
+                  type="java.lang.String"/>
+
+    <!-- Proprietes utilisees par l'affinite -->
+    <ResourceLink name="affinite.profil.solr.url" global="affinite.profil.solr.url" type="java.lang.String"/>
+    <ResourceLink name="affinite.cv.solr.url" global="affinite.cv.solr.url" type="java.lang.String"/>
+    <ResourceLink name="affinite.offre.solr.url" global="affinite.offre.solr.url" type="java.lang.String"/>
+    <ResourceLink name="affinite.offre.core.solr.url" global="affinite.offre.core.solr.url" type="java.lang.String"/>
+    <ResourceLink name="similarite.offre.core.solr.url" global="similarite.offre.core.solr.url"
+                  type="java.lang.String"/>
+
+    <!-- autocompletion : Propriete permettant de configurer le client solr pour l'autocompletion et la correction orthographique -->
+    <ResourceLink name="autocompletion.solr.url" global="autocompletion.solr.url" type="java.lang.String"/>
+
+    <!-- Proprietes utilisees par le service d'autocompletion et de spellcheck -->
+    <ResourceLink name="autocompletion.query.minLength" global="autocompletion.query.minLength"
+                  type="java.lang.Integer"/>
+
+    <!-- emailing - Proprietes utilisees par le service d'emailing -->
+    <ResourceLink name="smtp.server.host" global="smtp.server.host" type="java.lang.String"/>
+    <ResourceLink name="smtp.server.port" global="smtp.server.port" type="java.lang.String"/>
+    <ResourceLink name="smtp.server.protocol" global="smtp.server.protocol" type="java.lang.String"/>
+    <ResourceLink name="smtp.server.defaultEncoding" global="smtp.server.defaultEncoding" type="java.lang.String"/>
+    <ResourceLink name="smtp.server.authentication" global="smtp.server.authentication" type="java.lang.Boolean"/>
+    <ResourceLink name="emailing.templates.basePath" global="emailing.templates.basePath" type="java.lang.String"/>
+    <ResourceLink name="candidapec.echange.message.titre" global="candidapec.echange.message.titre"
+                  type="java.lang.String"/>
+
+    <!-- offre-bo-indexing-orchestration -->
+    <ResourceLink name="offre.bo.indexing.semantic.activation" global="offre.bo.indexing.semantic.activation"
+                  type="java.lang.Boolean"/>
+    <ResourceLink name="offre.bo.solr.ecriture.url" global="offre.bo.solr.ecriture.url" type="java.lang.String"/>
+
+    <!-- recherche-offre-bo -->
+    <ResourceLink name="recherche.offre.bo.semantic.activation" global="recherche.offre.bo.semantic.activation"
+                  type="java.lang.Boolean"/>
+    <ResourceLink name="offre.bo.solr.lecture.url" global="offre.bo.solr.lecture.url" type="java.lang.String"/>
+
+    <!-- file-generator: Proprietes utilisees par le service de generation de fichiers -->
+    <ResourceLink name="file.generation.image.basePath" global="file.generation.image.basePath"
+                  type="java.lang.String"/>
+
+    <!-- portfolio -->
+    <ResourceLink name="server.upload.portfolio.location.tmp.folder"
+                  global="server.upload.portfolio.location.tmp.folder" type="java.lang.String"/>
+    <ResourceLink name="server.upload.portfolio.location.folder" global="server.upload.portfolio.location.folder"
+                  type="java.lang.String"/>
+    <ResourceLink name="server.upload.demande.location.tmp.folder" global="server.upload.demande.location.tmp.folder"
+                  type="java.lang.String"/>
+
+    <!-- demande -->
+    <ResourceLink name="demande.url.pds.offre" global="demande.url.pds.offre" type="java.lang.String"/>
+
+    <!-- DDS-->
+    <ResourceLink name="server.upload.demande.location.tmp.folder" global="server.upload.demande.location.tmp.folder"
+                  type="java.lang.String"/>
+
+    <!-- authentification ldap -->
+    <ResourceLink name="ldap.system-user.login" global="ldap.system-user.login" type="java.lang.String"/>
+    <ResourceLink name="ldap.system-user.password" global="ldap.system-user.password" type="java.lang.String"/>
+    <ResourceLink name="ldap.provider.url" global="ldap.provider.url" type="java.lang.String"/>
+    <ResourceLink name="ldap.base.search" global="ldap.base.search" type="java.lang.String"/>
+
+    <!-- affinite orchestration -->
+    <ResourceLink name="affinite.server.url" global="affinite.server.url" type="java.lang.String"/>
+
+    <!-- doublons offre-->
+    <ResourceLink name="similarite.server.url" global="similarite.server.url" type="java.lang.String"/>
+
+    <!-- spring.profiles.active (security-activated, security-disabled, security-integration)-->
+    <ResourceLink name="spring.profiles.active" global="spring.profiles.active" type="java.lang.String"/>
+
+    <!-- cache offre -->
+    <ResourceLink name="cache.url.offre.purge.all" global="cache.url.offre.purge.all" type="java.lang.String"/>
+    <ResourceLink name="cache.url.offre.purge" global="cache.url.offre.purge" type="java.lang.String"/>
+    <ResourceLink name="cache.url.offre.insertion" global="cache.url.offre.insertion" type="java.lang.String"/>
+
+    <ResourceLink name="templating.context.envPds" global="templating.context.envPds" type="java.lang.String"/>
+
+    <ResourceLink name="server.document.icap.server" global="server.document.icap.server" type="java.lang.String"/>
+    <ResourceLink name="server.document.icap.port" global="server.document.icap.port" type="java.lang.Integer"/>
+    <ResourceLink name="server.document.icap.service" global="server.document.icap.service" type="java.lang.String"/>
+    <ResourceLink name="server.download.validation.antivirus" global="server.download.validation.antivirus"
+                  type="java.lang.Boolean"/>
+
+    <ResourceLink name="aes.utils.secret64.128key" global="aes.utils.secret64.128key" type="java.lang.String"/>
+
+    <!-- Candidature MER email -->
+    <ResourceLink name="candidature.mer.mail" global="candidature.mer.mail" type="java.lang.String"/>
+
+    <!-- url site recruteurs -->
+    <ResourceLink name="recruteurs.host.url" global="recruteurs.host.url" type="java.lang.String"/>
+
+    <!-- Temps -->
+    <ResourceLink name="temps.date.blocage.sessions" global="temps.date.blocage.sessions" type="java.lang.String"/>
+
+    <ResourceLink name="templating.context.candidapecDetailsCvLink" global="templating.context.candidapecDetailsCvLink"
+                  type="java.lang.String"/>
+
+    <ResourceLink name="token.manager.validUsersCapacity" global="token.manager.validUsersCapacity"
+                  type="java.lang.Long"/>
+    <ResourceLink name="token.manager.dureeValiditeTokenHr" global="token.manager.dureeValiditeTokenHr"
+                  type="java.lang.Integer"/>
+
+    <!-- Autopromo -->
+    <ResourceLink name="autopromo.enabled.jd" global="autopromo.enabled.jd" type="java.lang.Boolean"/>
+    <ResourceLink name="autopromo.enabled.cadres" global="autopromo.enabled.cadres" type="java.lang.Boolean"/>
+    <ResourceLink name="autopromo.seuil" global="autopromo.seuil" type="java.lang.Integer"/>
+
+    <ResourceLink name="recherche.profil.boostIntituleExperienceSignificative"
+                  global="recherche.profil.boostIntituleExperienceSignificative" type="java.lang.Float"/>
+
+
+</Context>
